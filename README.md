@@ -1,1 +1,1 @@
-Some workl done with Thinkful's apprenticeship
+Some excerpts of work done with Thinkful's apprenticeship
