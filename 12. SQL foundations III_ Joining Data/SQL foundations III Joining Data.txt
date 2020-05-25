@@ -1,0 +1,69 @@
+
+
+
+2. 
+Write a query that returns the namefirst and namelast fields of the people table, 
+along with the inducted field from the hof_inducted table. All rows from the people 
+table should be returned, and NULL values for the fields from hof_inducted should be 
+returned when there is no match found.
+
+SELECT people.namefirst, people.namelast, hof_inducted.inducted
+FROM people FULL OUTER JOIN hof_inducted
+ON people.playerid=hof_inducted.playerid;
+
+》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+
+3. 
+In 2006, a special Baseball Hall of Fame induction was conducted for players from the 
+negro baseball leagues of the 20th century. In that induction, 17 players were posthumously 
+inducted into the Baseball Hall of Fame. Write a query that returns the first and last names, 
+birth and death dates, and birth countries for these players. Note that the year of induction was 2006,
+ and the value for votedby will be “Negro League.”
+
+SELECT namefirst, namelast, birthyear, deathyear,birthcountry
+FROM people LEFT OUTER JOIN hof_inducted
+ON people.playerid=hof_inducted.playerid
+WHERE hof_inducted.yearid=2006
+AND hof_inducted.votedby='Negro League'
+
+》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+
+4.Write a query that returns the yearid, playerid, teamid, and salary fields from the salaries table, 
+along with the category field from the hof_inducted table. Keep only the records that are in both salaries
+ and hof_inducted. Hint: While a field named yearid is found in both tables, don’t JOIN by it. You must, 
+however, explicitly name which field to include.
+
+SELECT salaries.yearid, salaries.playerid,salaries.teamid, salaries.salary, hof_inducted.category
+FROM salaries INNER JOIN hof_inducted
+ON salaries.playerid=hof_inducted.playerid;
+
+》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+5.Write a query that returns the playerid, yearid, teamid, lgid, and salary fields from the salaries 
+table and the inducted field from the hof_inducted table. Keep all records from both tables.
+SELECT salaries.playerid, salaries.yearid, salaries.teamid, salaries.lgid, salaries.salary, hof_inducted.inducted
+FROM salaries FULL OUTER JOIN hof_inducted
+ON salaries.playerid=hof_inducted.playerid;
+
+
+》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+6. There are 2 tables, hof_inducted and hof_not_inducted, indicating successful and unsuccessful inductions
+into the Baseball Hall of Fame, respectively.
+1. Combine these 2 tables by all fields. Keep all records.
+
+SELECT hof_inducted.*, hof_not_inducted.*
+FROM hof_inducted FULL OUTER JOIN hof_not_inducted
+ON hof_inducted.playerid=hof_not_inducted.playerid;
+
+2. Get a distinct list of all player IDs for players who have been put up for HOF induction.
+
+
+》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+7.Write a query that returns the last name, first name (see people table), and total recorded salaries 
+for all players found in the salaries table.
+SELECT people.namelast, people.namefirst,  salaries.salary
+FROM people LEFT OUTER JOIN salaries
+ON people.playerid=salaries.playerid;
+
+》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+8. Write a query that returns all records from the hof_inducted and hof_not_inducted tables that include playerid,
+ yearid, namefirst, and namelast. Hint: Each FROM statement will include a LEFT OUTER JOIN!
